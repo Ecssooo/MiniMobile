@@ -15,8 +15,12 @@ public class DragObject : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     [Header("Prefab")]
     [SerializeField] private GameObject _objectPrefab;
-
     public GameObject ObjectPrefab { get => _objectPrefab; }
+
+    [Header("Object Settings")]
+    [SerializeField] private int _cost;
+    public int Cost { get => _cost; }
+    
     
     public void OnBeginDrag(PointerEventData eventData)
     {
