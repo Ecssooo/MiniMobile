@@ -40,6 +40,6 @@ public class UIController : MonoBehaviour
     
     private void SetupAllUI()
     {
-        UIUpdateMoney(GameManager.Instance.Money);
+        UIUpdateMoney(GameManager.Instance.MoneyController.MoneyBanq);
     }
 }

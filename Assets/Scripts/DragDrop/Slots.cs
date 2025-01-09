@@ -10,13 +10,13 @@ public class Slots : MonoBehaviour, IDropHandler
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("Drop");
-        if(!_slotInShop && eventData.pointerDrag.transform.childCount == 0)
+        GameObject dropped = eventData.pointerDrag;
+        DragObject dragObject = dropped.GetComponent<DragObject>();
+        if(!_slotInShop && dropped.transform.childCount == 0 && GameManager.Instance.MoneyController.MoneyBanq >= dragObject.Cost)
         {
-            GameObject dropped = eventData.pointerDrag;
-            DragObject dragObject = dropped.GetComponent<DragObject>();
             this.GetComponent<Image>().enabled = false;
             Instantiate(dragObject.ObjectPrefab, _slotInWorld);
-            GameManager.Instance.SubMoney(dragObject.Cost);
+            GameManager.Instance.MoneyController.SubMoney(dragObject.Cost);
         }
     }
 }
