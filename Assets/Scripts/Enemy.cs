@@ -1,48 +1,73 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private int currentWaypointIndex;
-    private float speed;
+    public int maxHP = 50;
+    public int currentHP = 50;
+    public int damageToBase = 10;
     public float patrolSpeed = 2f;
     public Transform[] waypoints;
+    public Transform healthBar;
+    public Vector3 healthBarOffset = new Vector3(0, 1, 0);
+
+    int currentWaypointIndex;
 
     void Start()
     {
-        speed = patrolSpeed;
+        float ratio = (float)currentHP / maxHP;
+        if (healthBar != null)
+        {
+            healthBar.localScale = new Vector3(Mathf.Clamp01(ratio), healthBar.localScale.y, healthBar.localScale.z);
+        }
     }
 
     void Update()
     {
-
-        enemyPatrol();
-
-    }
-
-    void enemyPatrol()
-    {
-        if (waypoints.Length == 0) return;
-        if (currentWaypointIndex < waypoints.Length)
+        if (waypoints != null && currentWaypointIndex < waypoints.Length)
         {
-            Transform targetWaypoint = waypoints[currentWaypointIndex];
-            Vector2 direction = (targetWaypoint.position - transform.position).normalized;
-            transform.position += (Vector3)(direction * speed * Time.deltaTime);
-            if (Vector2.Distance(transform.position, targetWaypoint.position) < 0.1f)
+            Vector2 dir = (waypoints[currentWaypointIndex].position - transform.position).normalized;
+            transform.position += (Vector3)(dir * patrolSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex].position) < 0.1f)
             {
                 currentWaypointIndex++;
             }
         }
-        return;
+        if (healthBar != null)
+        {
+            healthBar.position = transform.position + healthBarOffset;
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void TakeDamage(int amount)
     {
-        if (collision.gameObject.tag == "base")
+        currentHP -= amount;
+        float ratio = Mathf.Clamp01((float)currentHP / maxHP);
+        if (healthBar != null)
         {
-            Debug.Log("Enemy reached base!");
+            healthBar.localScale = new Vector3(ratio, healthBar.localScale.y, healthBar.localScale.z);
+        }
+        if (currentHP <= 0)
+        {
             Destroy(gameObject);
         }
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("base"))
+        {
+            BaseHealth b = collision.GetComponent<BaseHealth>();
+            if (b != null)
+            {
+                b.TakeDamage(damageToBase);
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    public void SetWaypoints(Transform[] newWaypoints)
+    {
+        waypoints = newWaypoints;
+        currentWaypointIndex = 0;
+    }
 }
