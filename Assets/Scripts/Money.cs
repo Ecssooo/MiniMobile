@@ -3,7 +3,10 @@ using UnityEngine.Serialization;
 
 public class Money : MonoBehaviour
 {
-    [FormerlySerializedAs("_money")] [SerializeField] private int moneyBanq;
+    [SerializeField] private int _moneyAtStart;
+    public int MoneyAtStart {get => _moneyAtStart; }
+    
+    [SerializeField] private int moneyBanq;
     public int MoneyBanq { get => moneyBanq; }
 
     public int AddMoney(int value)

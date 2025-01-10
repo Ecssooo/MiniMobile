@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BaseHealth : MonoBehaviour
 {
-    public int baseHP = 100;
+    [SerializeField] private int baseHP = 100;
 
     public void TakeDamage(int damage)
     {
@@ -10,6 +10,9 @@ public class BaseHealth : MonoBehaviour
         if (baseHP <= 0)
         {
             Destroy(gameObject);
+            GameManager.Instance.EndState();
+            GameManager.Instance.BaseAlive = false;
+            
         }
     }
 }

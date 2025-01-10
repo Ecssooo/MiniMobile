@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHP = 50;
-    public int currentHP = 50;
-    public int damageToBase = 10;
-    public float patrolSpeed = 2f;
-    public Transform[] waypoints;
-    public Transform healthBar;
-    public Vector3 healthBarOffset = new Vector3(0, 1, 0);
-
+    [SerializeField] private int maxHP = 50;
+    [SerializeField] private int currentHP = 50;
+    [SerializeField] private int damageToBase = 10;
+    [SerializeField] private float patrolSpeed = 2f;
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private Transform healthBar;
+    [SerializeField] private Vector3 healthBarOffset = new Vector3(0, 1, 0);
+    [SerializeField] private int _moneyValue;
     int currentWaypointIndex;
 
     void Start()
@@ -48,6 +48,7 @@ public class Enemy : MonoBehaviour
         }
         if (currentHP <= 0)
         {
+            GameManager.Instance.MoneyController.AddMoney(_moneyValue);
             Destroy(gameObject);
         }
     }

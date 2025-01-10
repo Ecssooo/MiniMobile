@@ -26,8 +26,11 @@ public class UIController : MonoBehaviour
     
     
     [SerializeField] private TextMeshProUGUI _moneyTXT;
-
-
+    [SerializeField] private GameObject _startScreen;
+    [SerializeField] private GameObject _shop;
+    [SerializeField] private GameObject _shopDisable;
+    [SerializeField] private GameObject _defeatScreen;
+    [SerializeField] private GameObject _winScreen;
     private void Start()
     {
         SetupAllUI();
@@ -41,5 +44,22 @@ public class UIController : MonoBehaviour
     private void SetupAllUI()
     {
         UIUpdateMoney(GameManager.Instance.MoneyController.MoneyBanq);
+    }
+
+    public void UpdateStartScreen(bool state) { _startScreen.SetActive(state); }
+
+    public void UpdateShop(bool state) { _shop.SetActive(state); }
+    public void BlockShop(bool state) { _shopDisable.SetActive(state);}
+    
+    public void UpdateDefeatScreen(bool state){_defeatScreen.SetActive(state);}
+    public void UpdateWinScreen(bool state){_winScreen.SetActive(state);}
+    
+    public void DisableAllUI()
+    {
+        UpdateStartScreen(false);
+        UpdateShop(false);
+        BlockShop(false);
+        UpdateDefeatScreen(false);
+        UpdateWinScreen(false);
     }
 }

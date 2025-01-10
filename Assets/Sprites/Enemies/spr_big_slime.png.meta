@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -125,19 +125,19 @@ TextureImporter:
       name: spr_big_slime_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 14
-        height: 7
+        width: 12
+        height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fb365ae56537b4540800000000000000
+      spriteID: e10bba5a79aa2064ebb60e242676a6e3
       internalID: 4993211426662605759
       vertices: []
       indices: 
@@ -147,9 +147,9 @@ TextureImporter:
       name: spr_big_slime_1
       rect:
         serializedVersion: 2
-        x: 15
+        x: 16
         y: 0
-        width: 12
+        width: 10
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -157,9 +157,9 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6f0aeb48f1aa59f40800000000000000
+      spriteID: 08963ecf118f4df40a48ab4d4d425738
       internalID: 5734676752873988342
       vertices: []
       indices: 
@@ -169,19 +169,19 @@ TextureImporter:
       name: spr_big_slime_2
       rect:
         serializedVersion: 2
-        x: 28
+        x: 29
         y: 0
-        width: 14
-        height: 7
+        width: 12
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3c5be94b77a99efa0800000000000000
+      spriteID: 38978914352ad9f4799ea45d562446ea
       internalID: -5770911608576494141
       vertices: []
       indices: 
@@ -191,19 +191,19 @@ TextureImporter:
       name: spr_big_slime_3
       rect:
         serializedVersion: 2
-        x: 41
+        x: 42
         y: 0
-        width: 15
-        height: 6
+        width: 14
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 988924cb6f17f9210800000000000000
+      spriteID: 5b828b9d2295dca45b710799f737dd16
       internalID: 1341916518514071689
       vertices: []
       indices: 
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: d17b4d78da951234f96b67a92e10e9d3
     internalID: 0
     vertices: []
     indices: 

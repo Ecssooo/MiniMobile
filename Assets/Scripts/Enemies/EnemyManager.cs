@@ -1,15 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
-    public Wave[] waves;
-    public Button waveButton;
+    [SerializeField] private Wave[] waves;
+    [SerializeField] private Button waveButton;
     int currentWaveIndex;
     bool isWaveInProgress;
-
+    private List<Enemy> _ennemiesList = new List<Enemy>();
     void Start()
     {
         if (waveButton != null)
@@ -39,6 +41,7 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < totalToSpawn; i++)
         {
+            if (GameManager.Instance.GameState != GameStates.Battle) break;
             WeightedEnemy chosen = GetRandomEnemy(wave.enemies);
             if (chosen != null)
             {
@@ -47,6 +50,7 @@ public class EnemyManager : MonoBehaviour
                 Enemy e = spawned.GetComponent<Enemy>();
                 if (e != null)
                 {
+                    _ennemiesList.Add(e);
                     e.SetWaypoints(wave.waveWaypoints);
                 }
             }
@@ -54,6 +58,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length == 0);
+        GameManager.Instance.SetupState();
+        if(currentWaveIndex >= waves.Length) { GameManager.Instance.EndState(); }
         isWaveInProgress = false;
     }
 
@@ -75,5 +81,14 @@ public class EnemyManager : MonoBehaviour
         {
             waveButton.interactable = true;
         }
+    }
+
+    public void ResetWave()
+    {
+        for (int i = 0; i < _ennemiesList.Count; i++)
+        {
+            if(_ennemiesList[i] != null) Destroy(_ennemiesList[i].gameObject);
+        }
+        // _ennemiesList.Clear();
     }
 }
