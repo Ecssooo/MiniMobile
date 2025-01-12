@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8f0287a249b91408367989c5236fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 500
-  _damage: 25
+  _speed: 750
+  _damage: 50
   _rb: {fileID: 2170077339666373592}
   _ennemyAttach: {fileID: 0}
 --- !u!50 &2170077339666373592
@@ -200,7 +200,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 120
-  m_Sprite: {fileID: -3198619865601037842, guid: c76ca591361e1b043871247ac6d935ff, type: 3}
+  m_Sprite: {fileID: -16100082053161934, guid: 35fffc7c261a94c4eb8ddba17dce9134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

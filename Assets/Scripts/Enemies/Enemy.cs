@@ -1,4 +1,7 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +14,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector3 healthBarOffset = new Vector3(0, 1, 0);
     [SerializeField] private int _moneyValue;
     int currentWaypointIndex;
+
+    public event Action OnDie;
 
     void Start()
     {
@@ -49,6 +54,7 @@ public class Enemy : MonoBehaviour
         if (currentHP <= 0)
         {
             GameManager.Instance.MoneyController.AddMoney(_moneyValue);
+            OnDie?.Invoke();
             Destroy(gameObject);
         }
     }
@@ -58,6 +64,7 @@ public class Enemy : MonoBehaviour
         if (collision.TryGetComponent(out BaseHealth b)) //if (collision.CompareTag("base"))
         {
             b.TakeDamage(damageToBase);
+            OnDie?.Invoke();
             Destroy(gameObject);
             
             // BaseHealth b = collision.GetComponent<BaseHealth>();

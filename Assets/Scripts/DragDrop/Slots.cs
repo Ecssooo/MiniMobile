@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,9 +15,17 @@ public class Slots : MonoBehaviour, IDropHandler
         if(!_slotInShop && dropped.transform.childCount == 0 && GameManager.Instance.MoneyController.MoneyBanq >= dragObject.Cost)
         {
             this.GetComponent<Image>().enabled = false;
-            Instantiate(dragObject.ObjectPrefab, _slotInWorld);
+            var tower = Instantiate(dragObject.ObjectPrefab, _slotInWorld);
             GameManager.Instance.MoneyController.SubMoney(dragObject.Cost);
-            TowerController.Instance.TowerList.Add(dragObject.ObjectPrefab.GetComponentInChildren<TowerAttack>());
+            TowerController.Instance.TowerList.Add(tower);
+        }
+    }
+
+    private void Update()
+    {
+        if (this.transform.childCount == 0)
+        {
+            this.GetComponent<Image>().enabled = true;
         }
     }
 }

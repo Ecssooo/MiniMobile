@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class EnemyManager : MonoBehaviour
     int currentWaveIndex;
     bool isWaveInProgress;
     private List<Enemy> _ennemiesList = new List<Enemy>();
+
+    [SerializeField] private Image _coinImage;    
+    
     void Start()
     {
         if (waveButton != null)
@@ -51,6 +55,7 @@ public class EnemyManager : MonoBehaviour
                 if (e != null)
                 {
                     _ennemiesList.Add(e);
+                    e.OnDie += PlayAnim;
                     e.SetWaypoints(wave.waveWaypoints);
                 }
             }
@@ -90,5 +95,11 @@ public class EnemyManager : MonoBehaviour
             if(_ennemiesList[i] != null) Destroy(_ennemiesList[i].gameObject);
         }
         // _ennemiesList.Clear();
+    }
+
+    public void PlayAnim()
+    {
+        _coinImage.gameObject.SetActive(true);
+        _coinImage.GetComponent<Animation>().Play();
     }
 }

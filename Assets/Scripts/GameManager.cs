@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         s_gameState = GameStates.StartScreen;
         _baseAlive = true;
+        Screen.orientation = ScreenOrientation.LandscapeRight;
     }
 
     private void Update()
@@ -75,6 +76,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetupState() { s_gameState = GameStates.Setup; }
+    public void StartState() { s_gameState = GameStates.StartScreen; }
     public void BattleState() { s_gameState = GameStates.Battle; }
 
     public void EndState()

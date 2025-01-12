@@ -21,19 +21,20 @@ public class TowerController : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private List<TowerAttack> _towerList = new List<TowerAttack>();
-    public List<TowerAttack> TowerList { get => _towerList; }
+    [SerializeField] private List<GameObject> _towerList = new List<GameObject>();
+    public List<GameObject> TowerList { get => _towerList; }
 
     public void ResetTower()
     {
         foreach(var tower in _towerList)
         {
-            for (int j = 0; j < tower.AmmoList.Count; j++)
+            var script = tower.GetComponentInChildren<TowerAttack>();
+            for (int j = 0; j < script.AmmoList.Count; j++)
             {
-                if(tower.AmmoList[j] != null) Destroy(tower.AmmoList[j].transform.parent.gameObject);
+                if(script.AmmoList[j] != null) Destroy(script.AmmoList[j].transform.parent.gameObject);
             }
-            tower.EnemiesList.Clear();
-            tower.AmmoList.Clear();
+            script.EnemiesList.Clear();
+            script.AmmoList.Clear();
         }
     }
 
@@ -41,7 +42,7 @@ public class TowerController : MonoBehaviour
     {
         for (int j = 0; j < _towerList.Count; j++)
         {
-            if(_towerList[j] != null) Destroy(_towerList[j].transform.parent);
+            if(_towerList[j] != null) Destroy(_towerList[j]);
         }
         _towerList.Clear();
     }
