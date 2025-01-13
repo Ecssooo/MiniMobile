@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: -5967320807715920189, guid: c7fe568d658ae81498f2564c05bafc8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -131,9 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c83d8100f6c69a342b760c093068de15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 50
-  currentHP: 50
-  damageToBase: 50
+  maxHP: 250
+  currentHP: 250
+  damageToBase: 30
   patrolSpeed: 1
   waypoints:
   - {fileID: 0}
@@ -284,7 +284,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11012435, g: 1, b: 0, a: 1}
   m_FlipX: 0

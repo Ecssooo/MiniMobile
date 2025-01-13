@@ -63,8 +63,11 @@ public class EnemyManager : MonoBehaviour
         }
 
         yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length == 0);
-        GameManager.Instance.SetupState();
-        if(currentWaveIndex >= waves.Length) { GameManager.Instance.EndState(); }
+        if(GameManager.Instance.GameState != GameStates.End) GameManager.Instance.SetupState();
+        if (currentWaveIndex >= waves.Length)
+        {
+            GameManager.Instance.EndState();
+        }
         isWaveInProgress = false;
     }
 

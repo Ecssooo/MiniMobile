@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(s_gameState);
 
         // -------------- AJOUT --------------
         PlayMusicForCurrentState();
@@ -74,10 +73,11 @@ public class GameManager : MonoBehaviour
             case GameStates.StartScreen:
                 UIController.Instance.DisableAllUI();
                 UIController.Instance.UpdateStartScreen(true);
-                _moneyController.AddMoney(_moneyController.MoneyAtStart);
+                _baseAlive = true;
                 break;
             case GameStates.Setup:
                 UIController.Instance.DisableAllUI();
+                UIController.Instance.UIUpdateMoney(_moneyController.MoneyBanq);
                 UIController.Instance.UpdateShop(true);
                 UIController.Instance.BlockShop(false);
                 _enemyController.ResetWave();

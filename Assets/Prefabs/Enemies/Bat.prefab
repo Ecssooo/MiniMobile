@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 5268096014038210963, guid: 820763785123c3d4c8a21a069ab6ae5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,14 +133,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 50
   currentHP: 50
-  damageToBase: 50
-  patrolSpeed: 1
+  damageToBase: 10
+  patrolSpeed: 2.5
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
   healthBar: {fileID: 5392116888243959393}
   healthBarOffset: {x: 0, y: 1, z: 0}
-  _moneyValue: 5
+  _moneyValue: 1
 --- !u!61 &3913817338964664032
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.11012435, g: 1, b: 0, a: 1}
   m_FlipX: 0

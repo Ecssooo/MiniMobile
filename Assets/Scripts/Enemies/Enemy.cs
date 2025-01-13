@@ -64,7 +64,6 @@ public class Enemy : MonoBehaviour
         if (collision.TryGetComponent(out BaseHealth b)) //if (collision.CompareTag("base"))
         {
             b.TakeDamage(damageToBase);
-            OnDie?.Invoke();
             Destroy(gameObject);
             
             // BaseHealth b = collision.GetComponent<BaseHealth>();

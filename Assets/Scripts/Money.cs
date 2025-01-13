@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,8 +7,14 @@ public class Money : MonoBehaviour
     [SerializeField] private int _moneyAtStart;
     public int MoneyAtStart {get => _moneyAtStart; }
     
-    [SerializeField] private int moneyBanq;
+    private int moneyBanq;
     public int MoneyBanq { get => moneyBanq; }
+
+
+    private void Update()
+    {
+        if(GameManager.Instance.GameState == GameStates.StartScreen) moneyBanq = _moneyAtStart;
+    }
 
     public int AddMoney(int value)
     {

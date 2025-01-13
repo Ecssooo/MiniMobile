@@ -10,26 +10,30 @@ public class Ammo : MonoBehaviour
     [SerializeField] private Enemy _ennemyAttach;
     public Enemy EnnemyAttach { get => _ennemyAttach; set => _ennemyAttach = value; }
 
-    private Vector2 direction;
+    private Vector3 direction;
 
     // -------------- AJOUT --------------
     [Header("Audio")]
     [SerializeField] private AudioSource _hitAudioSource;
     // -----------------------------------
-
+    
     private void Start()
     {
-        direction = (_ennemyAttach.transform.position - this.transform.position).normalized;
+        direction = (_ennemyAttach.transform.position - this.transform.position);
+        double angle = Math.Atan2(direction.y,direction.x) * (180/Math.PI);
+        
+        transform.rotation = Quaternion.Euler(0,0,(float)angle);
     }
 
     private void Update()
     {
         Move();
+        
     }
 
     private void Move()
     {
-        Vector3 velocity = direction * _speed * Time.deltaTime;
+        Vector3 velocity = direction.normalized * _speed * Time.deltaTime;
         _rb.MovePosition(transform.position + velocity);
     }
 
@@ -37,19 +41,18 @@ public class Ammo : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy en))
         {
-            if (en == _ennemyAttach)
+            en.TakeDamage(_damage);
+
+            // -------------- AJOUT --------------
+            if (_hitAudioSource)
             {
-                en.TakeDamage(_damage);
-
-                // -------------- AJOUT --------------
-                if (_hitAudioSource)
-                {
-                    _hitAudioSource.Play();
-                }
-                // -----------------------------------
-
-                Destroy(this.gameObject);
+                _hitAudioSource.Play();
             }
+            // -----------------------------------
+
+            Destroy(this.gameObject);
         }
+        
+        if(other.CompareTag("bounds")){Destroy(this.gameObject);}
     }
 }
