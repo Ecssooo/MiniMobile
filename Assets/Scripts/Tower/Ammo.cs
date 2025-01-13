@@ -11,7 +11,12 @@ public class Ammo : MonoBehaviour
     public Enemy EnnemyAttach { get => _ennemyAttach; set => _ennemyAttach = value; }
 
     private Vector2 direction;
-    
+
+    // -------------- AJOUT --------------
+    [Header("Audio")]
+    [SerializeField] private AudioSource _hitAudioSource;
+    // -----------------------------------
+
     private void Start()
     {
         direction = (_ennemyAttach.transform.position - this.transform.position).normalized;
@@ -21,7 +26,7 @@ public class Ammo : MonoBehaviour
     {
         Move();
     }
-    
+
     private void Move()
     {
         Vector3 velocity = direction * _speed * Time.deltaTime;
@@ -35,6 +40,14 @@ public class Ammo : MonoBehaviour
             if (en == _ennemyAttach)
             {
                 en.TakeDamage(_damage);
+
+                // -------------- AJOUT --------------
+                if (_hitAudioSource)
+                {
+                    _hitAudioSource.Play();
+                }
+                // -----------------------------------
+
                 Destroy(this.gameObject);
             }
         }

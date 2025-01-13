@@ -8,15 +8,19 @@ public class TowerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject _ammo;
     [SerializeField] private List<Enemy> _ennemiesList;
-    public List<Enemy> EnemiesList { get => _ennemiesList;}
+    public List<Enemy> EnemiesList { get => _ennemiesList; }
 
     [SerializeField] private float _shootDelay;
     private float t_shoot;
 
     [SerializeField] private List<Ammo> _ammoList = new();
     public List<Ammo> AmmoList { get => _ammoList; }
-    
-    
+
+    // -------------- AJOUT --------------
+    [Header("Audio")]
+    [SerializeField] private AudioSource _attackAudioSource;
+    // -----------------------------------
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out Enemy ennemy))
@@ -29,7 +33,8 @@ public class TowerAttack : MonoBehaviour
     {
         if (other.TryGetComponent(out Enemy ennemy))
         {
-            if (other.enabled == false) {
+            if (other.enabled == false)
+            {
                 _ennemiesList.Remove(ennemy);
             }
             for (int i = 0; i < _ennemiesList.Count; i++)
@@ -48,15 +53,24 @@ public class TowerAttack : MonoBehaviour
         {
             Shoot();
             t_shoot = 0;
-        }else
+        }
+        else
         {
             t_shoot += Time.deltaTime;
         }
     }
-    
+
     void Shoot()
     {
-        if (_ennemiesList.Count == 0) return; 
+        if (_ennemiesList.Count == 0) return;
+
+        // -------------- AJOUT --------------
+        if (_attackAudioSource)
+        {
+            _attackAudioSource.Play();
+        }
+        // -----------------------------------
+
         var ammoGO = Instantiate(_ammo, transform);
         Ammo ammo = ammoGO.GetComponentInChildren<Ammo>();
         ammo.EnnemyAttach = _ennemiesList[0];
