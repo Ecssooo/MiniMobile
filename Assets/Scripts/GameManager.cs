@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum GameStates
 {
@@ -30,56 +31,43 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private Money _moneyController;
-    public Money MoneyController { get => _moneyController; set => _moneyController = value; }
+    [FormerlySerializedAs("_moneyController")] [SerializeField] private MoneyController moneyControllerController;
+    public MoneyController MoneyController { get => moneyControllerController; set => moneyControllerController = value; }
 
     [SerializeField] private EnemyManager _enemyController;
 
-    private bool _baseAlive;
-    public bool BaseAlive { get => _baseAlive; set => _baseAlive = value; }
+    [SerializeField] private BaseController _baseController;
+    public BaseController BaseController { get => _baseController; }
 
     private GameStates s_gameState;
     public GameStates GameState => s_gameState;
 
-    // -------------- AJOUT --------------
+
     [Header("Gestion Musique")]
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _startClip;
     [SerializeField] private AudioClip _setupClip;
     [SerializeField] private AudioClip _battleClip;
     [SerializeField] private AudioClip _endClip;
-    // ------------------------------------
 
     private void Start()
     {
         s_gameState = GameStates.StartScreen;
-        _baseAlive = true;
         Screen.orientation = ScreenOrientation.LandscapeRight;
 
-        // -------------- AJOUT --------------
         PlayMusicForCurrentState();
-        // -----------------------------------
     }
 
     private void Update()
     {
-
-        // -------------- AJOUT --------------
         PlayMusicForCurrentState();
-        // -----------------------------------
 
         switch (s_gameState)
         {
             case GameStates.StartScreen:
-                UIController.Instance.DisableAllUI();
-                UIController.Instance.UpdateStartScreen(true);
-                _baseAlive = true;
+                _baseController.BaseAlive = true;
                 break;
             case GameStates.Setup:
-                UIController.Instance.DisableAllUI();
-                UIController.Instance.UIUpdateMoney(_moneyController.MoneyBanq);
-                UIController.Instance.UpdateShop(true);
-                UIController.Instance.BlockShop(false);
                 _enemyController.ResetWave();
                 TowerController.Instance.ResetTower();
                 break;
@@ -91,8 +79,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetupState() { s_gameState = GameStates.Setup; }
     public void StartState() { s_gameState = GameStates.StartScreen; }
+    public void SetupState() { s_gameState = GameStates.Setup; }
     public void BattleState() { s_gameState = GameStates.Battle; }
 
     public void EndState()
@@ -101,7 +89,7 @@ public class GameManager : MonoBehaviour
         _enemyController.ResetWave();
         TowerController.Instance.ResetTower();
         TowerController.Instance.DeleteAllTower();
-        if (!_baseAlive)
+        if (!_baseController.BaseAlive)
         {
             UIController.Instance.DisableAllUI();
             UIController.Instance.UpdateDefeatScreen(true);
@@ -113,7 +101,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // -------------- AJOUT --------------
     private void PlayMusicForCurrentState()
     {
         if (!_audioSource) return;
@@ -133,5 +120,4 @@ public class GameManager : MonoBehaviour
             _audioSource.Play();
         }
     }
-    // -----------------------------------
 }

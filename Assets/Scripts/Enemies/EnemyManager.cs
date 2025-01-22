@@ -8,6 +8,26 @@ using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour
 {
+    #region Instance
+
+    private static EnemyManager _instance;
+    public static EnemyManager Instance { get => _instance; }
+
+    public virtual void Awake()
+    {
+        if (!_instance)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion
+    
+    
     [SerializeField] private Wave[] waves;
     [SerializeField] private Button waveButton;
     int currentWaveIndex;

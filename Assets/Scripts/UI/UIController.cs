@@ -62,4 +62,27 @@ public class UIController : MonoBehaviour
         UpdateDefeatScreen(false);
         UpdateWinScreen(false);
     }
+
+
+    private void Update()
+    {
+        switch (GameManager.Instance.GameState)
+        {
+            case GameStates.StartScreen:
+                DisableAllUI();
+                UpdateStartScreen(true);
+                break;
+            case GameStates.Setup:
+                DisableAllUI();
+                UIUpdateMoney(GameManager.Instance.MoneyController.MoneyBanq);
+                UpdateShop(true);
+                BlockShop(false);
+                break;
+            case GameStates.Battle:
+                BlockShop(true);
+                break;
+            case GameStates.End:
+                break;
+        }
+    }
 }

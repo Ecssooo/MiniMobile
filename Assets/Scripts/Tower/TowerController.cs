@@ -28,7 +28,7 @@ public class TowerController : MonoBehaviour
     {
         foreach(var tower in _towerList)
         {
-            var script = tower.GetComponentInChildren<TowerAttack>();
+            var script = tower.GetComponentInChildren<Towers>();
             for (int j = 0; j < script.AmmoList.Count; j++)
             {
                 if(script.AmmoList[j] != null) Destroy(script.AmmoList[j].transform.parent.gameObject);

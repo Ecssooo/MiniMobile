@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out BaseHealth b)) //if (collision.CompareTag("base"))
+        if (collision.TryGetComponent(out BaseController b)) //if (collision.CompareTag("base"))
         {
             b.TakeDamage(damageToBase);
             Destroy(gameObject);
